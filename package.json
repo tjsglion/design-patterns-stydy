@@ -1,0 +1,20 @@
+{
+  "name": "design-patterns-stydy",
+  "version": "1.0.0",
+  "description": "创建型设计模式是一类处理对象创建的设计模式， 通过某种方式控制对象的创建来避免基本对象创建时可能导致设计上的问题或增加设计上的复杂度；",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjsglion/design-patterns-stydy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjsglion/design-patterns-stydy/issues"
+  },
+  "homepage": "https://github.com/tjsglion/design-patterns-stydy#readme"
+}
