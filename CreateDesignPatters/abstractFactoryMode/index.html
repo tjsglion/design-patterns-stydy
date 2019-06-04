@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // function Car () {
+    //   this.type = 'car';
+    //   // console.log('===================== init Car =====================');
+    // }
+    // Car.prototype.getPrice = function () { return new Error('抽象方法不能调用'); };
+    // Car.prototype.getSpeed = function () { return new Error('抽象方法不能调用'); }
+
+    // function BWM () {
+    //   Car.apply(this, arguments);
+    // }
+
+    // const __proto__ = Object.create(Car.prototype);
+    // BWM.prototype = __proto__;
+    // BWM.prototype.constructor = BWM;
+    // const bwm = new BWM();
+    // console.log(bwm.type, bwm.getPrice());
+    // const car = new Car();
+    // BWM.prototype = car;
+    // BWM.prototype.constructor = BWM;
+    // var bwm = new BWM();
+    // console.log(bwm);
+    // 创建抽象工厂类
+    // function AbstractFactory (subType, superType) {
+    //   if (typeof AbstractFactory[superType] === 'function') {
+    //     // 创建缓存类
+    //     // function F() {};
+    //     // 继承父类属性和方法
+    //     // const parent = new AbstractFactory[superType]();
+    //     // const __proto__ = Object.create(parent);
+    //     // subType.prototype = __proto__;
+    //     // subType.constructor = subType;
+    //     function F() {};
+    //     F.prototype = new AbstractFactory[superType]();
+    //     subType.constructor = subType;
+    //     subType.prototype = new F();
+    //   } else {
+    //     return new Error('未创建该抽象类');
+    //   }
+    // }
+
+    // AbstractFactory.Car = function () {
+    //   this.type = 'car';
+    // }
+    // AbstractFactory.Car.prototype.getPrice = function () {
+    //   return new Error('抽象方法不能调用');
+    // };
+    // AbstractFactory.Car.prototype.getSpeed = function () {
+    //   return new Error('抽象方法不能调用');
+    // };
+
+    // var BWM = function (speed, price) {
+    //   this.speed = speed;
+    //   this.price = price;
+    // }
+    // AbstractFactory(BWM, 'Car');
+
+    // BWM.prototype.getPrice = function () {
+    //   console.log('BWM的价格是: ', this.price);
+    // }
+    // BWM.prototype.getSpeed = function () {
+    //   console.log('BWM的速度: ', this.speed);
+    // }
+
+    // const bwm = new BWM(1000, 1000000);
+    // bwm.getPrice();
+    // bwm.getSpeed();
+    // console.log(bwm.type);
+    // console.log('======================')
+    // console.log(bwm.prototype, bwm);
+    
+    const AbstractFactory = function (subType, superType) {
+      if (typeof AbstractFactory[superType] === 'function') {
+        // 子类继承父类的属性和方法
+        // 原型继承
+        // function F () { // 继承父类属性
+        //   AbstractFactory[superType].call(this, arguments);
+        // }
+        // var __proto__ = Object.create(AbstractFactory[superType].prototype);
+        // __proto__.constructor = F;
+        // F.prototype = __proto__;
+        // subType.prototype = new F();
+        // subType.prototype.constructor = subType;
+
+        // 寄生式继承
+        function F () {}
+        F.prototype = new AbstractFactory[superType]();
+        subType.prototype = new F();
+        subType.prototype.constructor = subType;
+      } else {
+        return new Error('未创建该抽象类');
+      }
+    }
+
+    AbstractFactory.Car = function () {
+      this.type = 'car';
+      console.log('init car=====================');
+    }
+    AbstractFactory.Car.prototype.getPrice = function () {  return new Error('抽象方法不能调用'); };
+
+    function BWM () {}
+    AbstractFactory(BWM, 'Car');
+    var bwm = new BWM();
+    console.log(bwm, bwm.type, bwm.getPrice());
+  </script>
+</body>
+</html>
